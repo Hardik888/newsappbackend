@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "_id": 1,
+      "username": "user1",
+      "password": "password1",
+      "email": "user1@example.com",
+      "bio": "I'm user1.",
+      "profilepicture": "user1.jpg",
+      "about": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "_id": 2,
+      "username": "user2",
+      "password": "password2",
+      "email": "user2@example.com",
+      "bio": "I'm user2.",
+      "profilepicture": "user2.jpg",
+      "about": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+      "_id": 3,
+      "username": "user3",
+      "password": "password3",
+      "email": "user3@example.com",
+      "bio": "I'm user3.",
+      "profilepicture": "user3.jpg",
+      "about": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    }
+  ]
+}
