@@ -1,11 +1,11 @@
 import { Controller, Req, Res, HttpStatus, Post, Get, UseGuards } from "@nestjs/common";
 import { Request, Response } from "express";
-import { UserService } from "./auth.service";
+import { AuthService } from "./auth.service";
 import { AuthenticationGuard } from "./guards/auth.guard";
-@Controller('users')
 
-export class UserController {
-    constructor(private readonly userService: UserService) { }
+@Controller('users')
+export class AuthController {
+    constructor(private readonly userService: AuthService) { }
 
     @Post()
     async insertFirst(@Req() req: Request, @Res() res: Response) {

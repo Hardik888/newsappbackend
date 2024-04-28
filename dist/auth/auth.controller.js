@@ -12,11 +12,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserController = void 0;
+exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_guard_1 = require("./guards/auth.guard");
-let UserController = class UserController {
+let AuthController = class AuthController {
     constructor(userService) {
         this.userService = userService;
     }
@@ -64,7 +64,7 @@ let UserController = class UserController {
         }
     }
 };
-exports.UserController = UserController;
+exports.AuthController = AuthController;
 __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Req)()),
@@ -72,7 +72,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "insertFirst", null);
+], AuthController.prototype, "insertFirst", null);
 __decorate([
     (0, common_1.Post)('/login'),
     __param(0, (0, common_1.Req)()),
@@ -80,7 +80,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "loginFirst", null);
+], AuthController.prototype, "loginFirst", null);
 __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthenticationGuard),
     (0, common_1.Get)('/check'),
@@ -89,9 +89,9 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
-], UserController.prototype, "checkguard", null);
-exports.UserController = UserController = __decorate([
+], AuthController.prototype, "checkguard", null);
+exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('users'),
-    __metadata("design:paramtypes", [auth_service_1.UserService])
-], UserController);
+    __metadata("design:paramtypes", [auth_service_1.AuthService])
+], AuthController);
 //# sourceMappingURL=auth.controller.js.map

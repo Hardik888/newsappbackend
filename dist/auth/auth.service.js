@@ -8,20 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserService = void 0;
+exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const mongoose_1 = require("mongoose");
 const argon2 = require("argon2");
 const axios_1 = require("axios");
 const config_1 = require("@nestjs/config");
 const jwt_1 = require("@nestjs/jwt");
-let UserService = class UserService {
-    constructor(userModel, configService, jwtservice) {
-        this.userModel = userModel;
+const user_service_1 = require("../users/user.service");
+let AuthService = class AuthService {
+    constructor(authservice, configService, jwtservice) {
+        this.authservice = authservice;
         this.configService = configService;
         this.jwtservice = jwtservice;
     }
@@ -47,7 +44,7 @@ let UserService = class UserService {
             }
             const hashedPassword = await argon2.hash(userdata.password);
             userdata.password = hashedPassword;
-            const newUser = new this.userModel(userdata);
+            const newUser = await this.authservice.create(userdata);
             const saveduser = await newUser.save();
             return saveduser;
         }
@@ -59,8 +56,8 @@ let UserService = class UserService {
     }
     async loginfirst(userdata) {
         try {
-            const { username, password } = userdata;
-            const findUser = await this.userModel.findOne({ username });
+            const { username, password, email } = userdata;
+            const findUser = await this.authservice.findOne(email);
             if (!username) {
                 return null;
             }
@@ -82,12 +79,11 @@ let UserService = class UserService {
         }
     }
 };
-exports.UserService = UserService;
-exports.UserService = UserService = __decorate([
+exports.AuthService = AuthService;
+exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)('USER_MODEL')),
-    __metadata("design:paramtypes", [mongoose_1.Model,
+    __metadata("design:paramtypes", [user_service_1.UserService,
         config_1.ConfigService,
         jwt_1.JwtService])
-], UserService);
+], AuthService);
 //# sourceMappingURL=auth.service.js.map

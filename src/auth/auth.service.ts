@@ -5,13 +5,12 @@ import * as argon2 from 'argon2';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-
+import { UserService } from 'src/users/user.service';
 @Injectable()
-export class UserService {
+export class AuthService {
 
     constructor(
-        @Inject('USER_MODEL')
-        private userModel: Model<User>,
+        private authservice: UserService,
         private readonly configService: ConfigService,
         private jwtservice: JwtService
     ) { }
@@ -39,7 +38,7 @@ export class UserService {
             }
             const hashedPassword = await argon2.hash(userdata.password);
             userdata.password = hashedPassword;
-            const newUser = new this.userModel(userdata);
+            const newUser = await this.authservice.create(userdata);
 
             const saveduser = await newUser.save();
             return saveduser;
@@ -53,8 +52,8 @@ export class UserService {
 
     async loginfirst(userdata: User): Promise<any | null> {
         try {
-            const { username, password } = userdata;
-            const findUser = await this.userModel.findOne({ username });
+            const { username, password, email } = userdata;
+            const findUser = await this.authservice.findOne(email)
             if (!username) {
                 return null;
             }
