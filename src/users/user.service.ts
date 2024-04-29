@@ -3,11 +3,9 @@ import { Model } from "mongoose";
 import { User } from "./entities/user.entity";
 
 @Injectable()
-
 export class UserService {
-
     constructor(
-        @Inject('USER_MODEL')
+        @Inject("USER_MODEL")
         private userModel: Model<User>
     ) { }
 
@@ -18,6 +16,4 @@ export class UserService {
     findOne(email: string) {
         return this.userModel.findOne({ email }).exec();
     }
-
-
 }

@@ -5,7 +5,6 @@ export const articleSchema = new mongoose.Schema<Article>({
     title: {
         type: String,
         required: true,
-
     },
     description: {
         type: String,
@@ -22,4 +21,5 @@ export const articleSchema = new mongoose.Schema<Article>({
     hashtages: {
         type: [{ String }]
     },
-})
+
+}, { timestamps: true })
