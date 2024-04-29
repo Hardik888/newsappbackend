@@ -22,13 +22,13 @@ exports.AuthModule = AuthModule = __decorate([
         imports: [
             jwt_1.JwtModule.register({
                 secret: 'secretkey',
-                signOptions: { expiresIn: '60s' }
+                signOptions: { expiresIn: '6d' }
             }),
             user_module_1.UserModule
         ],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, user_provider_1.UserProvider],
-        exports: [auth_guard_1.AuthenticationGuard]
+        providers: [auth_service_1.AuthService, user_provider_1.UserProvider, auth_guard_1.AuthenticationGuard],
+        exports: [auth_guard_1.AuthenticationGuard, jwt_1.JwtModule]
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map

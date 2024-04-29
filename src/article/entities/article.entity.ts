@@ -1,10 +1,10 @@
 import { Document } from "mongoose";
 
 export class Article extends Document {
-    title: String
-    description: String
-    image: String
+    title: string
+    description: string
+    image: string
     provider: String
     horizontal: boolean
-    hashtages: []
+    hashtags: []
 }

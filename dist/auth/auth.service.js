@@ -39,14 +39,14 @@ let AuthService = class AuthService {
             const response = await axios_1.default.request(options);
             const data = await response.data;
             console.log("the data is", data);
-            if (!data.mx_records && !data.valid) {
-                return null;
+            if (data.mx_records && data.valid) {
+                const hashedPassword = await argon2.hash(userdata.password);
+                userdata.password = hashedPassword;
+                const newUser = await this.authservice.create(userdata);
+                const saveduser = await newUser.save();
+                return saveduser;
             }
-            const hashedPassword = await argon2.hash(userdata.password);
-            userdata.password = hashedPassword;
-            const newUser = await this.authservice.create(userdata);
-            const saveduser = await newUser.save();
-            return saveduser;
+            return null;
         }
         catch (error) {
             console.error("Error saving", error.message);

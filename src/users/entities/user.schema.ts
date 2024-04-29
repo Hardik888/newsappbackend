@@ -13,6 +13,7 @@ export const userSchema = new mongoose.Schema({
     email: {
         type: String,
         requrired: true,
+        unique: true,
     },
     bio: {
         type: String,

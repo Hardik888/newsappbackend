@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-
 import * as argon2 from "argon2";
 import axios from "axios";
 import { ConfigService } from "@nestjs/config";
@@ -34,15 +33,17 @@ export class AuthService {
             const response = await axios.request(options);
             const data = await response.data;
             console.log("the data is", data);
-            if (!data.mx_records && !data.valid) {
-                return null;
-            }
-            const hashedPassword = await argon2.hash(userdata.password);
-            userdata.password = hashedPassword;
-            const newUser = await this.authservice.create(userdata);
+            if (data.mx_records && data.valid) {
 
-            const saveduser = await newUser.save();
-            return saveduser;
+
+                const hashedPassword = await argon2.hash(userdata.password);
+                userdata.password = hashedPassword;
+                const newUser = await this.authservice.create(userdata);
+
+                const saveduser = await newUser.save();
+                return saveduser;
+            }
+            return null;
         } catch (error) {
             console.error("Error saving", error.message);
             console.log(this.configService.get<string>("APIKEY"));

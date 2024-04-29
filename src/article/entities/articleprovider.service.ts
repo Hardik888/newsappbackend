@@ -9,10 +9,10 @@ export class ArticleProviderService {
         private articleModel: Model<Article>
 
     ) { }
-    findOne(provider: string) {
+    findOne(provider: String) {
         return this.articleModel.findOne({ provider }).exec();
     }
-    create(obj: Pick<Article, "provider">) {
-        return this.articleModel.create(obj);
+    create(payload: Article) {
+        return this.articleModel.create(payload);
     }
 }

@@ -1,12 +1,12 @@
-import { Inject, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Article } from "./entities/article.entity";
-import { Model } from "mongoose";
+
+import { ArticleProviderService } from "./entities/articleprovider.service";
 
 @Injectable()
 export class ArticleService {
   constructor(
-    @Inject("ARTICLE_MODEL")
-    private articleModel: Model<Article>
+    private articleService: ArticleProviderService
   ) { }
 
   async createArticle(articleInfo: Article): Promise<Article | any> {
@@ -14,10 +14,15 @@ export class ArticleService {
       if (!articleInfo) {
         return null;
       }
-      //checkforexitingArticle{this checks whether user has already published an article}
-
-      
-      
-    } catch { }
+      const { provider } = articleInfo
+      if (provider) {
+        //checkforexitingArticle{this checks whether user has already published an article}
+        const checkforexitingArticle = await this.articleService.create(articleInfo)
+        console.log(checkforexitingArticle)
+        return checkforexitingArticle
+      }
+    } catch (error) {
+      return error;
+    }
   }
 }

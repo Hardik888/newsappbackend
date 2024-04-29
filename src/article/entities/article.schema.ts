@@ -12,14 +12,17 @@ export const articleSchema = new mongoose.Schema<Article>({
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
     provider: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
-    hashtages: {
-        type: [{ String }]
-    },
+    hashtags:
+        [{
+            type: String,
+            default: []
+        }]
+    ,
 
 }, { timestamps: true })

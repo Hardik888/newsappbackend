@@ -10,12 +10,12 @@ import { AuthenticationGuard } from './guards/auth.guard';
     imports: [
         JwtModule.register({
             secret: 'secretkey',
-            signOptions: { expiresIn: '60s' }
+            signOptions: { expiresIn: '6d' }
         }),
         UserModule
     ],
     controllers: [AuthController],
-    providers: [AuthService, UserProvider],
-    exports: [AuthenticationGuard]
+    providers: [AuthService, UserProvider, AuthenticationGuard],
+    exports: [AuthenticationGuard, JwtModule]
 })
 export class AuthModule { }
