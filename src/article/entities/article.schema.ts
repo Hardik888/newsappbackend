@@ -16,7 +16,8 @@ export const articleSchema = new mongoose.Schema<Article>({
     },
     provider: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
     hashtags:
         [{

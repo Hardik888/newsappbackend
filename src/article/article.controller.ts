@@ -27,4 +27,21 @@ export class ArticleController {
         }
 
     }
+
+    @UseGuards(AuthenticationGuard)
+    @Post('update')
+    async updateArticle(@Req() req: Request, @Res() res: Response) {
+        try {
+            const body = req.body;
+            if (!body) {
+                throw new HttpException('Missing required provider data', HttpStatus.BAD_REQUEST);
+            }
+            const update = await this.articleService.updateArticle(body)
+            return res.status(HttpStatus.CREATED).json(update)
+
+        }
+        catch (error) {
+            throw new HttpException('Internal server error', HttpStatus.BAD_GATEWAY)
+        }
+    }
 }

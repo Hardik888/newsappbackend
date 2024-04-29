@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Param } from "@nestjs/common";
 import { Article } from "./entities/article.entity";
 
 import { ArticleProviderService } from "./entities/articleprovider.service";
@@ -16,13 +16,29 @@ export class ArticleService {
       }
       const { provider } = articleInfo
       if (provider) {
-        //checkforexitingArticle{this checks whether user has already published an article}
-        const checkforexitingArticle = await this.articleService.create(articleInfo)
-        console.log(checkforexitingArticle)
-        return checkforexitingArticle
+        //todo checkforexitingArticle{this checks whether user has already published an article}
+        // maximum limit of 5 articles per free users
+        // maybe implement a subscription model
+        // const checkforexitingArticle = await 
+        // console.log(checkforexitingArticle)
+        return this.articleService.create(articleInfo)
       }
     } catch (error) {
       return error;
     }
   }
+  async updateArticle(payload: any) {
+
+    try {
+      const { id } = payload
+      if (!id) {
+        return null;
+      }
+      return this.articleService.update(id, payload);
+    }
+    catch (error) {
+      throw new error;
+    }
+  }
+
 }
