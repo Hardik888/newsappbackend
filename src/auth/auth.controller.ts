@@ -28,10 +28,10 @@ export class AuthController {
         try {
             const userdata = req.body;
             const newUser = await this.userService.loginfirst(userdata)
-            if (newUser) {
-                return res.status(HttpStatus.CREATED).json(`lOGGEDIN ${newUser}`)
+            if (!newUser) {
+                return res.status(HttpStatus.BAD_REQUEST).send('ERROR LOGGIN IN ');
             }
-            return res.status(HttpStatus.BAD_REQUEST).send('ERROR LOGGIN IN ');
+            return res.status(HttpStatus.CREATED).json({ Userinfo: newUser })
         }
         catch (error) {
             console.error('Error from server ', error);
@@ -42,14 +42,14 @@ export class AuthController {
     }
     @UseGuards(AuthenticationGuard)
     @Get('/check')
-    async checkguard(@Req() req: any, @Res() res: Response) { // Use 'any' type for req
+    async checkguard(@Req() req: any, @Res() res: Response) {
         try {
-            const decodedToken = req.user; // Access decoded token without type checking
+            const decodedToken = req.user;
             console.log({ decodedToken }); // Log the decoded token
-            // Your logic after successful authentication
+
             return res.status(HttpStatus.OK).json({ message: 'Authentication successful' });
         } catch (error) {
-            // Handle errors
+
             console.error('Error from server ', error);
             return res.status(HttpStatus.INTERNAL_SERVER_ERROR).send('Internal Server Error');
         }

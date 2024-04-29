@@ -40,10 +40,10 @@ let AuthController = class AuthController {
         try {
             const userdata = req.body;
             const newUser = await this.userService.loginfirst(userdata);
-            if (newUser) {
-                return res.status(common_1.HttpStatus.CREATED).json(`lOGGEDIN ${newUser}`);
+            if (!newUser) {
+                return res.status(common_1.HttpStatus.BAD_REQUEST).send('ERROR LOGGIN IN ');
             }
-            return res.status(common_1.HttpStatus.BAD_REQUEST).send('ERROR LOGGIN IN ');
+            return res.status(common_1.HttpStatus.CREATED).json({ Userinfo: newUser });
         }
         catch (error) {
             console.error('Error from server ', error);

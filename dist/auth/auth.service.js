@@ -25,21 +25,21 @@ let AuthService = class AuthService {
     async insertFirst(userdata) {
         try {
             const encodedpParams = new URLSearchParams();
-            encodedpParams.set('email', userdata.email);
+            encodedpParams.set("email", userdata.email);
             const options = {
-                method: 'POST',
-                url: this.configService.get('APIURL'),
+                method: "POST",
+                url: this.configService.get("APIURL"),
                 headers: {
-                    'content-type': 'application/x-www-form-urlencoded',
-                    'X-RapidAPI-Key': this.configService.get('APIKEY'),
-                    'X-RapidAPI-Host': this.configService.get('APIHOST'),
+                    "content-type": "application/x-www-form-urlencoded",
+                    "X-RapidAPI-Key": this.configService.get("APIKEY"),
+                    "X-RapidAPI-Host": this.configService.get("APIHOST"),
                 },
                 data: encodedpParams,
             };
             const response = await axios_1.default.request(options);
             const data = await response.data;
-            console.log('the data is', data);
-            if (!data.mx_records || !data.valid) {
+            console.log("the data is", data);
+            if (!data.mx_records && !data.valid) {
                 return null;
             }
             const hashedPassword = await argon2.hash(userdata.password);
@@ -49,29 +49,29 @@ let AuthService = class AuthService {
             return saveduser;
         }
         catch (error) {
-            console.error('Error saving', error.message);
-            console.log(this.configService.get('APIKEY'));
+            console.error("Error saving", error.message);
+            console.log(this.configService.get("APIKEY"));
             return null;
         }
     }
     async loginfirst(userdata) {
         try {
-            const { username, password, email } = userdata;
+            const { password, email } = userdata;
             const findUser = await this.authservice.findOne(email);
-            if (!username) {
-                return null;
-            }
             const isPasswordvalid = await argon2.verify(findUser.password, password);
             if (!isPasswordvalid) {
                 return null;
             }
             const payload = {
-                username: username,
-                sub: userdata._id,
-                authType: 'login'
+                username: findUser.username,
+                sub: findUser._id,
+                authType: "login",
             };
             const access_token = this.jwtservice.sign(payload);
-            return access_token;
+            return {
+                UserEmail: findUser.email,
+                token: access_token,
+            };
         }
         catch (error) {
             console.log(error);
