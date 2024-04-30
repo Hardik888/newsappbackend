@@ -24,7 +24,8 @@ export const userSchema = new mongoose.Schema({
         required: false,
     },
     subscriptionType: {
-        typ: String,
+        type: Boolean,
+
 
     },
 });

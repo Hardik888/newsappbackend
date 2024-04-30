@@ -23,7 +23,6 @@ export const articleSchema = new mongoose.Schema<Article>({
         [{
             type: String,
             default: []
-        }]
-    ,
+        }],
 
 }, { timestamps: true })

@@ -14,17 +14,18 @@ const user_provider_1 = require("../users/entities/user.provider");
 const jwt_1 = require("@nestjs/jwt");
 const user_module_1 = require("../users/user.module");
 const auth_guard_1 = require("./guards/auth.guard");
+const common_2 = require("@nestjs/common");
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
         imports: [
+            (0, common_2.forwardRef)(() => user_module_1.UserModule),
             jwt_1.JwtModule.register({
                 secret: 'secretkey',
                 signOptions: { expiresIn: '6d' }
             }),
-            user_module_1.UserModule
         ],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService, user_provider_1.UserProvider, auth_guard_1.AuthenticationGuard],
