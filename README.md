@@ -1,3 +1,23 @@
+**Project Title:** Building a Flexible Backend for Article News with Authentication and Subscription Features
+
+**Description:** I created a sturdy backend using NestJs, Mongoose, and TypeScript for an article news app. By implementing JWT authentication, users could securely log in and upload articles based on their subscription status.
+
+**Technologies Explored:**
+
+- **NestJs:** Using  NestJs to create a scalable and easy-to-maintain backend.
+- **Mongoose:** With Mongoose, I organised application data in MongoDB, allowing for adaptable article storage.
+- **TypeScript:** TypeScript for strong type checking which made my code more readable and manageable, ensuring smoother development.
+- **JWT Authentication:** Implementing JWT authentication provided a secure login system, restricting access to authorised users only.
+
+**Key Features:**
+
+1. **User Authentication:** Prioritised security by enabling JWT authentication, ensuring that only authorised users could access the app also hashing and verifying the password via login.
+2. **Article Upload:** Users with subscriptions could contribute articles, enhancing content diversity and user engagement.
+
+**Achievements:**
+
+- **Creating Versatile Solutions:** My backend isn't just limited to one niche; it's designed to adapt to diverse interests like news, fitness, and sports. This flexibility ensures that users find content that resonates with them, enhancing their experience on the platform.
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
@@ -44,30 +64,6 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
 ## License
 
 Nest is [MIT licensed](LICENSE).
